@@ -51,4 +51,8 @@ public final class Constants {
     public final static int POV_LEFT = 270;
   }
 
+public final static class IntakeConstants {
+  public final static int INTAKE_MOTOR = 0;
+}
+
 }
