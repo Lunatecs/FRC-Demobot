@@ -51,8 +51,13 @@ public final class Constants {
     public final static int POV_LEFT = 270;
   }
 
-public final static class IntakeConstants {
-  public final static int INTAKE_MOTOR = 0;
-}
+  public final static class IntakeConstants {
+    public final static int INTAKE_MOTOR = 0;
+  }
+
+  public final static class FeederConstants {
+    public final static int LEFT_MOTOR = 0;
+    public final static int RIGHT_MOTOR = 0;
+  }
 
 }
