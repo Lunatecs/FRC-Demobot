@@ -37,11 +37,12 @@ public class RobotContainer {
     configureBindings();
     configureDefaultCommands();
   }
+
   public void configureDefaultCommands() {
     // add keybinds for turnInPlace, fast, and reverse
     drivetrain.setDefaultCommand(new LooneyDriveCommand(drivetrain,
-    () -> {return driverJoystick.getRawAxis(Constants.JoystickConstants.LEFT_Y_AXIS);}, 
-    () -> {return driverJoystick.getRawAxis(Constants.JoystickConstants.RIGHT_X_AXIS);}, 
+    () -> {return -driverJoystick.getRawAxis(Constants.JoystickConstants.LEFT_Y_AXIS);}, 
+    () -> {return -driverJoystick.getRawAxis(Constants.JoystickConstants.RIGHT_X_AXIS);}, 
     () -> driverJoystick.getRawButton(JoystickConstants.RIGHT_BUMPER), 
     () -> driverJoystick.getRawButton(JoystickConstants.LEFT_BUMPER)));
 
@@ -49,21 +50,32 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-    new Trigger(() -> {return Math.abs(driverJoystick.getRawAxis(JoystickConstants.RIGHT_TRIGGER)) > 0.1;}).onTrue(new ParallelCommandGroup(new RunIntakeCommand(() -> driverJoystick.getRawAxis(JoystickConstants.RIGHT_TRIGGER), intake),
-                                                                                                                                            new RunFeederCommand(() -> driverJoystick.getRawAxis(JoystickConstants.RIGHT_TRIGGER), feeder)))
-                                                                                                            .onFalse(new ParallelCommandGroup(new InstantCommand(() -> {}, intake),
-                                                                                                                                              new InstantCommand(() -> {}, feeder)));
-    new Trigger(() -> {return Math.abs(driverJoystick.getRawAxis(JoystickConstants.LEFT_TRIGGER)) > 0.1;}).onTrue(new ParallelCommandGroup(new RunIntakeCommand(() -> -driverJoystick.getRawAxis(JoystickConstants.LEFT_TRIGGER), intake),
-                                                                                                                                              new RunFeederCommand(() -> -driverJoystick.getRawAxis(JoystickConstants.LEFT_TRIGGER), feeder)))
-                                                                                                              .onFalse(new ParallelCommandGroup(new InstantCommand(() -> {}, intake),
-                                                                                                                                                new InstantCommand(() -> {}, feeder)));
-    new POVButton(driverJoystick, JoystickConstants.POV_UP).onTrue(new ParallelCommandGroup(new RunShooterCommand(() -> 0.75, shooter),
-                                                                                            new RunTowerCommand(() -> 0.75, tower)))
-                                                          .onFalse(new ParallelCommandGroup(new InstantCommand(() -> {}, shooter),
-                                                                                            new InstantCommand(() -> {}, tower)));
+    new Trigger(() -> {return Math.abs(driverJoystick.getRawAxis(JoystickConstants.RIGHT_TRIGGER)) > 0.1;}).onTrue(new ParallelCommandGroup(new RunIntakeCommand(() -> -driverJoystick.getRawAxis(JoystickConstants.RIGHT_TRIGGER), intake),
+                                                                                                                                            new RunFeederCommand(() -> -driverJoystick.getRawAxis(JoystickConstants.RIGHT_TRIGGER), feeder)))
+                                                                                                            .onFalse(new ParallelCommandGroup(new RunIntakeCommand(() -> 0, intake),
+                                                                                                                                              new RunFeederCommand(() -> 0, feeder)));
+    new Trigger(() -> {return Math.abs(driverJoystick.getRawAxis(JoystickConstants.LEFT_TRIGGER)) > 0.1;}).onTrue(new ParallelCommandGroup(new RunIntakeCommand(() -> driverJoystick.getRawAxis(JoystickConstants.LEFT_TRIGGER), intake),
+                                                                                                                                              new RunFeederCommand(() -> driverJoystick.getRawAxis(JoystickConstants.LEFT_TRIGGER), feeder)))
+                                                                                                              .onFalse(new ParallelCommandGroup(new RunIntakeCommand(() -> 0, intake),
+                                                                                                                                               new RunFeederCommand(() -> 0, feeder)));
+    new POVButton(driverJoystick, JoystickConstants.POV_UP).onTrue(new ParallelCommandGroup(new RunShooterCommand(() -> -1, shooter),
+                                                                                            new RunTowerCommand(() -> 0.5, tower)))
+                                                          .onFalse(new ParallelCommandGroup(new RunShooterCommand(() -> 0, shooter),
+                                                                                            new RunTowerCommand(() -> 0, tower)));
+    new POVButton(driverJoystick, JoystickConstants.POV_RIGHT).onTrue(new ParallelCommandGroup(new RunShooterCommand(() -> -.75, shooter),
+                                                                                            new RunTowerCommand(() -> 0.5, tower)))
+                                                          .onFalse(new ParallelCommandGroup(new RunShooterCommand(() -> 0, shooter),
+                                                                                            new RunTowerCommand(() -> 0, tower)));
+    new POVButton(driverJoystick, JoystickConstants.POV_DOWN).onTrue(new ParallelCommandGroup(new RunShooterCommand(() -> -0.5, shooter),
+                                                                                            new RunTowerCommand(() -> 0.5, tower)))
+                                                          .onFalse(new ParallelCommandGroup(new RunShooterCommand(() -> 0, shooter),
+                                                                                            new RunTowerCommand(() -> 0, tower)));
+    new POVButton(driverJoystick, JoystickConstants.POV_LEFT).onTrue(new ParallelCommandGroup(new RunShooterCommand(() -> -.25, shooter),
+                                                                                            new RunTowerCommand(() -> 0.5, tower)))
+                                                          .onFalse(new ParallelCommandGroup(new RunShooterCommand(() -> 0, shooter),
+                                                                                            new RunTowerCommand(() -> 0, tower)));
                                                                                 
   }
-
 
 
 }

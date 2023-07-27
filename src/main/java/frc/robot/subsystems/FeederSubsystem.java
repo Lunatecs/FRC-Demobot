@@ -6,14 +6,15 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.FeederConstants;
 
 public class FeederSubsystem extends SubsystemBase {
-  private final WPI_VictorSPX leftGuiders = new WPI_VictorSPX(FeederConstants.LEFT_MOTOR);
-  private final WPI_VictorSPX rightGuiders = new WPI_VictorSPX(FeederConstants.RIGHT_MOTOR);
+  private final WPI_TalonSRX leftGuiders = new WPI_TalonSRX(FeederConstants.LEFT_MOTOR);
+  private final WPI_TalonSRX rightGuiders = new WPI_TalonSRX(FeederConstants.RIGHT_MOTOR);
 
   public FeederSubsystem() {
     leftGuiders.configFactoryDefault();
@@ -22,7 +23,7 @@ public class FeederSubsystem extends SubsystemBase {
     leftGuiders.setNeutralMode(NeutralMode.Brake);
     rightGuiders.setNeutralMode(NeutralMode.Brake);
 
-    leftGuiders.setInverted(true);
+    rightGuiders.setInverted(true);
   }
 
   @Override

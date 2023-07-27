@@ -9,9 +9,10 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.TowerConstants;
 
 public class TowerSubsystem extends SubsystemBase {
-  private final WPI_TalonSRX tower = new WPI_TalonSRX(0);
+  private final WPI_TalonSRX tower = new WPI_TalonSRX(TowerConstants.TOWER_MOTOR);
 
   public TowerSubsystem() {
     tower.configFactoryDefault();

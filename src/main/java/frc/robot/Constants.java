@@ -14,12 +14,12 @@ package frc.robot;
  */
 public final class Constants {
   public final static class DrivetrainConstants {    //VALUES NEED TO BE CHANGED
-    public final static int LEFT_FRONT = 2;    
-    public final static int LEFT_BACK = 4;
-    public final static int RIGHT_FRONT = 3;
-    public final static int RIGHT_BACK = 1;
+    public final static int LEFT_FRONT = 14;    
+    public final static int LEFT_BACK = 15;
+    public final static int RIGHT_FRONT = 12;
+    public final static int RIGHT_BACK = 9;
 
-    public final static int PIGEON = 24; 
+    public final static int PIGEON = 20; 
   }
 
   public final static class JoystickConstants{
@@ -52,12 +52,22 @@ public final class Constants {
   }
 
   public final static class IntakeConstants {
-    public final static int INTAKE_MOTOR = 0;
+    public final static int INTAKE_MOTOR = 3;
   }
 
   public final static class FeederConstants {
-    public final static int LEFT_MOTOR = 0;
-    public final static int RIGHT_MOTOR = 0;
+    public final static int LEFT_MOTOR = 13;
+    public final static int RIGHT_MOTOR = 11;
+  }
+
+  public final static class TowerConstants {
+    public final static int TOWER_MOTOR = 20;
+  }
+
+  public final static class ShooterConstants {
+    public final static int SHOOTER_MOTOR_RIGHT = 1;
+    public final static int SHOOTER_MOTORLEFT = 2;
+
   }
 
 }

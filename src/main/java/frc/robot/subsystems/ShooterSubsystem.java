@@ -9,10 +9,11 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private final CANSparkMax leftFlywheel = new CANSparkMax(0, MotorType.kBrushless);
-  private final CANSparkMax rightFlywheel = new CANSparkMax(0, MotorType.kBrushless);
+  private final CANSparkMax leftFlywheel = new CANSparkMax(ShooterConstants.SHOOTER_MOTORLEFT, MotorType.kBrushless);
+  private final CANSparkMax rightFlywheel = new CANSparkMax(ShooterConstants.SHOOTER_MOTOR_RIGHT, MotorType.kBrushless);
   
   public ShooterSubsystem() {
     leftFlywheel.restoreFactoryDefaults();
