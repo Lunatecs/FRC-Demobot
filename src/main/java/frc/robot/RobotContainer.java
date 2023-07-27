@@ -9,12 +9,17 @@ import frc.robot.Constants.JoystickConstants;
 import frc.robot.commands.LooneyDriveCommand;
 import frc.robot.commands.RunFeederCommand;
 import frc.robot.commands.RunIntakeCommand;
+import frc.robot.commands.RunShooterCommand;
+import frc.robot.commands.RunTowerCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.FeederSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TowerSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 
@@ -23,6 +28,8 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final IntakeSubsystem intake = new IntakeSubsystem();
   private final FeederSubsystem feeder = new FeederSubsystem();
+  private final TowerSubsystem tower = new TowerSubsystem();
+  private final ShooterSubsystem shooter = new ShooterSubsystem();
 
   private final Joystick driverJoystick = new Joystick(Constants.JoystickConstants.DRIVER_USB);
 
@@ -50,6 +57,11 @@ public class RobotContainer {
                                                                                                                                               new RunFeederCommand(() -> -driverJoystick.getRawAxis(JoystickConstants.LEFT_TRIGGER), feeder)))
                                                                                                               .onFalse(new ParallelCommandGroup(new InstantCommand(() -> {}, intake),
                                                                                                                                                 new InstantCommand(() -> {}, feeder)));
+    new POVButton(driverJoystick, JoystickConstants.POV_UP).onTrue(new ParallelCommandGroup(new RunShooterCommand(() -> 0.75, shooter),
+                                                                                            new RunTowerCommand(() -> 0.75, tower)))
+                                                          .onFalse(new ParallelCommandGroup(new InstantCommand(() -> {}, shooter),
+                                                                                            new InstantCommand(() -> {}, tower)));
+                                                                                
   }
 
 

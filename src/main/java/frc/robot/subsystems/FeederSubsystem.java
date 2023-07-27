@@ -21,6 +21,8 @@ public class FeederSubsystem extends SubsystemBase {
     
     leftGuiders.setNeutralMode(NeutralMode.Brake);
     rightGuiders.setNeutralMode(NeutralMode.Brake);
+
+    leftGuiders.setInverted(true);
   }
 
   @Override
@@ -30,6 +32,6 @@ public class FeederSubsystem extends SubsystemBase {
 
   public void setFeederSpeed(double speed) {
     leftGuiders.set(ControlMode.PercentOutput, speed);
-    rightGuiders.set(ControlMode.PercentOutput, -speed);
+    rightGuiders.set(ControlMode.PercentOutput, speed);
   }
 }
